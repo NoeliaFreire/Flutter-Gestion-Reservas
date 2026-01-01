@@ -29,7 +29,6 @@ class TarjetaEstado extends StatelessWidget {
       decoration: BoxDecoration(
         color: colorFondo,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(width: 0.5),
         boxShadow: [
           BoxShadow(
             color: colorFondo.withOpacity(0.5),

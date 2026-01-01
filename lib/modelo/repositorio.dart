@@ -5,13 +5,26 @@ typedef FiltroBusqueda = bool Function(Reserva);
 
 //Clase Repositorio: Gestiona de la colección de objetos Reserva
 class Repositorio {
+  //Instancia privada única
+  static final Repositorio _instancia = Repositorio._interno();
+  //Constructor factory que devuelve siempre la lista cargada
+  factory Repositorio(){
+      return _instancia;
+  }
+  //Constructor nombreado privado que solo se ejecuta una vez
+  Repositorio._interno(){
+    if (_reservas.isEmpty) {
+      agregarEjemplo();
+    }
+  }
+
   //Almacenamiento principal mediante una lista
   List<Reserva> _reservas = [];
 
   //Contador estático para asegurar que el código sea único para cada Reserva
   static int _ultimoCodigo = 0;
 
-//Getters y Setters
+  //Getters y Setters
   List<Reserva> get reservas => _reservas;
 
   set reservas(List<Reserva> value) => _reservas = value;
@@ -77,19 +90,46 @@ class Repositorio {
         codigo: generarCodigo(),
         cliente: 'Alexandro Bello',
         habitacion: 101,
-        fechaInicio: DateTime(2025, 10, 10),
-        fechaFin: DateTime(2025, 10, 15),
+        fechaInicio: DateTime(2026, 10, 10),
+        fechaFin: DateTime(2026, 10, 15),
         estado: EstadoReserva.confirmada,
         importe: 350.0,
       ),
       Reserva(
         codigo: generarCodigo(),
-        cliente: 'Noa Ladra',
+        cliente: 'Gillermo Díaz',
         habitacion: 102,
         fechaInicio: DateTime(2025, 11, 1),
         fechaFin: DateTime(2025, 11, 3),
         estado: EstadoReserva.pendiente,
         importe: 200.0,
+      ),
+      Reserva(
+        codigo: generarCodigo(),
+        cliente: 'Noelia Freire',
+        habitacion: 103,
+        fechaInicio: DateTime(2026, 02, 14),
+        fechaFin: DateTime(2026, 02, 18),
+        estado: EstadoReserva.pendiente,
+        importe: 560.9,
+      ),
+      Reserva(
+        codigo: generarCodigo(),
+        cliente: 'Álvaro Ruíz',
+        habitacion: 101,
+        fechaInicio: DateTime(2026, 04, 3),
+        fechaFin: DateTime(2025, 04, 21),
+        estado: EstadoReserva.cancelada,
+        importe: 2500.0,
+      ),
+      Reserva(
+        codigo: generarCodigo(),
+        cliente: 'Samuel de Luque',
+        habitacion: 105,
+        fechaInicio: DateTime(2026, 01, 02),
+        fechaFin: DateTime(2026, 01, 02),
+        estado: EstadoReserva.pendiente,
+        importe: 777.0,
       ),
     ]);
     print("Datos añadidos correctamente!");
@@ -125,5 +165,10 @@ class Repositorio {
     r.fechaFin.year == hoy.year &&
     r.fechaFin.month == hoy.month &&
     r.fechaFin.day == hoy.day).length;
+  }
+
+  //Devuelve la lsita de reservas
+  List<Reserva> obtenerTodas(){
+    return _reservas;
   }
 }

@@ -44,11 +44,29 @@ class ElementoListaReserva extends StatelessWidget {
                   fontSize: 16
                 ),),
                 SizedBox(height: 5,),
-                Text(
-                  "Hab: ${reserva.habitacion} Check-in: ${reserva.fechaInicio}",
-                  style: TextStyle(
-                    color: Colors.grey.shade600
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Habitación: ${reserva.habitacion}",
+                      style: TextStyle(
+                        color: Colors.grey.shade600
+                      ),
+                    ),
+                    SizedBox(width: 15,),
+                    Text(
+                      "Check-in: ${reserva.fechaInicio.day}/${reserva.fechaInicio.month}/${reserva.fechaInicio.year}",
+                      style: TextStyle(
+                          color: Colors.grey.shade600
+                        ),
+                    ),
+                    SizedBox(width: 15,),
+                    Text("Check-out: ${reserva.fechaFin.day}/${reserva.fechaFin.month}/${reserva.fechaFin.year}",
+                      style: TextStyle(
+                          color: Colors.grey.shade600
+                      ),
+                    ),
+                      ],
                 )
               ],
             ))
