@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:xestion_reservas_hotel/vista/pantalla/pantalla_detalle_reserva.dart';
+import 'package:xestion_reservas_hotel/vista/pantalla/pantalla_formulario_reserva.dart';
 import 'package:xestion_reservas_hotel/vista/widgets/tarjeta_estado.dart';
 import '../../modelo/reserva.dart';
 import '../../modelo/repositorio.dart';
@@ -12,16 +14,41 @@ class PantallaPrincipal extends StatefulWidget {
 }
 
 class _PantallaPrincipalState extends State<PantallaPrincipal> {
+  int _indice = 0;
+  final List<Widget> _pantallas = [
+    ContenidoPrincipal(),           // Todo el contenido que tienes ahora en el body de Inicio
+    PantallaListadoReservas(), // Tu clase de listado
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 221, 230, 242),
-      appBar: AppBar(
-        title: Text("Hotel Ego - Viveiro",style: TextStyle(color: Colors.white),),
-        backgroundColor: Colors.blueAccent,
-        centerTitle: true,
+      appBar: AppBar( //Toma el estilo del tema
+        title: Text("Hotel Ego - Viveiro")
       ),
-      body: SingleChildScrollView(
+      body: _pantallas[_indice],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _indice,
+        selectedItemColor: Colors.blue,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home),label: 'Inicio'),
+          BottomNavigationBarItem(icon: Icon(Icons.list),label: 'Reservas')
+        ],
+        onTap: (int nuevoindice){
+          setState(() {
+            _indice = nuevoindice;
+          });
+        },),
+    );
+  }
+}
+
+class ContenidoPrincipal extends StatelessWidget {
+  const ContenidoPrincipal({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    //final repositorio = Repositorio();
+    return SingleChildScrollView(
         padding: EdgeInsets.all(15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,13 +76,13 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             SizedBox(height: 50,),
             ElevatedButton(
               onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => PantallaListadoReservas()),);}, 
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PantallaFormularioReserva()),);}, 
               style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8),)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text("Ver listado de reservas",style: TextStyle(color: Colors.white, fontSize: 20)),
+                  Text("Crear reserva",style: TextStyle(color: Colors.white, fontSize: 20)),
                   SizedBox(width: 10,),
                   Icon(Icons.arrow_forward_ios, color: Colors.white,)
                 ],
@@ -63,22 +90,6 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             )
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        selectedItemColor: Colors.blue,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home),label: 'Inicio'),
-          BottomNavigationBarItem(icon: Icon(Icons.list),label: 'Reservas')
-        ],
-        onTap: (indice){
-          if(indice == 0){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PantallaPrincipal()));
-          }
-          if(indice == 1){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PantallaListadoReservas()));
-          }
-        },),
-    );
+      );
   }
 }

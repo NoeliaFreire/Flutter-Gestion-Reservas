@@ -32,7 +32,7 @@ class ElementoListaReserva extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle
               ),
-              child: Icon(Icons.person, color: Colors.green,),
+              child: Icon(reserva.icono, color: Colors.green,),
             ),
             SizedBox(height: 15,),
             Expanded(child: Column(
@@ -44,8 +44,9 @@ class ElementoListaReserva extends StatelessWidget {
                   fontSize: 16
                 ),),
                 SizedBox(height: 5,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                Wrap(
+                  spacing: 10, //Espacio horizontal entre elementos
+                  runSpacing: 5, //Espacio vertical si salta de línea
                   children: [
                     Text(
                       "Habitación: ${reserva.habitacion}",
@@ -53,14 +54,14 @@ class ElementoListaReserva extends StatelessWidget {
                         color: Colors.grey.shade600
                       ),
                     ),
-                    SizedBox(width: 15,),
+                    SizedBox(width: 10,),
                     Text(
                       "Check-in: ${reserva.fechaInicio.day}/${reserva.fechaInicio.month}/${reserva.fechaInicio.year}",
                       style: TextStyle(
                           color: Colors.grey.shade600
                         ),
                     ),
-                    SizedBox(width: 15,),
+                    SizedBox(width: 10,),
                     Text("Check-out: ${reserva.fechaFin.day}/${reserva.fechaFin.month}/${reserva.fechaFin.year}",
                       style: TextStyle(
                           color: Colors.grey.shade600

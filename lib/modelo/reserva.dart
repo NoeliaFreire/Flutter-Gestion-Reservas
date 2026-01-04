@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 enum EstadoReserva { pendiente, confirmada, cancelada, finalizada }
 
 //Clase Reserva: Modela una reserva de hotel con sus atributos y estado.
@@ -13,6 +15,7 @@ class Reserva {
   DateTime _fechaFin;
   EstadoReserva _estado;
   double _importe;
+  IconData _icono;
 
   //Constructor con parámetros nombrados
   Reserva({
@@ -23,13 +26,15 @@ class Reserva {
     required DateTime? fechaFin,
     required EstadoReserva? estado,
     required double? importe,
+    required IconData? icono,
   }) : _codigo = codigo,
        _cliente = cliente ?? 'Desconocido',
        _habitacion = habitacion,
        _fechaInicio = fechaInicio ?? DateTime.now(),
        _fechaFin = fechaFin ?? DateTime.now().add(Duration(days: 1)),
        _estado = estado ?? EstadoReserva.pendiente,
-       _importe = importe ?? 0.0;
+       _importe = importe ?? 0.0,
+       _icono = icono ?? Icons.person;
 
   int get codigo => _codigo;
 
@@ -101,6 +106,9 @@ class Reserva {
     }
   }
 
+  set icono(IconData value) => _icono = value;
+
+  IconData get icono => _icono;
   //Representación de Reserva
   @override
   String toString() {

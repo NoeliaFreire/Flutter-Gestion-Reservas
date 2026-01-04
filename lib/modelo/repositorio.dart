@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
 import 'reserva.dart';
 
 //Define un alias para el clousure usados en las búsquedas
@@ -94,6 +97,7 @@ class Repositorio {
         fechaFin: DateTime(2026, 10, 15),
         estado: EstadoReserva.confirmada,
         importe: 350.0,
+        icono: Icons.person
       ),
       Reserva(
         codigo: generarCodigo(),
@@ -103,6 +107,7 @@ class Repositorio {
         fechaFin: DateTime(2025, 11, 3),
         estado: EstadoReserva.pendiente,
         importe: 200.0,
+        icono: Icons.star
       ),
       Reserva(
         codigo: generarCodigo(),
@@ -112,6 +117,7 @@ class Repositorio {
         fechaFin: DateTime(2026, 02, 18),
         estado: EstadoReserva.pendiente,
         importe: 560.9,
+        icono: Icons.bed
       ),
       Reserva(
         codigo: generarCodigo(),
@@ -121,6 +127,7 @@ class Repositorio {
         fechaFin: DateTime(2025, 04, 21),
         estado: EstadoReserva.cancelada,
         importe: 2500.0,
+        icono: Icons.person
       ),
       Reserva(
         codigo: generarCodigo(),
@@ -130,6 +137,7 @@ class Repositorio {
         fechaFin: DateTime(2026, 01, 02),
         estado: EstadoReserva.pendiente,
         importe: 777.0,
+        icono: Icons.person
       ),
     ]);
     print("Datos añadidos correctamente!");

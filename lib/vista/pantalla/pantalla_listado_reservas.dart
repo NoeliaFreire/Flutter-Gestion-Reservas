@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:xestion_reservas_hotel/vista/pantalla/pantalla_formulario_reserva.dart';
 import '../../modelo/repositorio.dart';
 import '../../modelo/reserva.dart';
 import '../widgets/elemento_lista_reserva.dart';
 import '../pantalla/pantalla_detalle_reserva.dart';
-import '../pantalla/pantalla_principal.dart';
+import 'pantalla_formulario_reserva.dart';
 
 class PantallaListadoReservas extends StatefulWidget {
   const PantallaListadoReservas({super.key});
@@ -14,44 +13,65 @@ class PantallaListadoReservas extends StatefulWidget {
 }
 
 class _PantallaListadoReservasState extends State<PantallaListadoReservas> {
-  final List<Reserva> _listaEjemplo = Repositorio().obtenerTodas();
+  final List<Reserva> _listaReservas = Repositorio().obtenerTodas();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 221, 230, 242),
-      appBar: AppBar(
-        title: Text("Hotel Ego - Viveiro",style: TextStyle(color: Colors.white),),
-        backgroundColor: Colors.blueAccent,
-        centerTitle: true,
-      ),
       body: ListView.builder(
-        itemCount: _listaEjemplo.length,
-        itemBuilder: (context,index){
-          final reserva = _listaEjemplo[index];
-          return ElementoListaReserva(reserva: reserva, onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PantallaDetalleReserva(reserva: reserva,)));
+        itemCount: _listaReservas.length,
+        padding: const EdgeInsets.only(top: 8, bottom: 8),
+        itemBuilder: (context, index) {
+          final reserva = _listaReservas[index];
+          return Dismissible(
+            //Clave para identificar la reserva eliminada
+            key: Key(reserva.codigo.toString()),
+            //Dirección del deslizamiento
+            direction: DismissDirection.endToStart,
+            //Fondo al deslizar. Rojo para indicar la eliminación
+            background: Container(
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              color: Colors.red,
+              child: Icon(Icons.delete, color: Colors.white,),
+            ),
+            //Función que realiza al terminar de deslizar
+            onDismissed: (direccion){
+              //Eliminar reserva de la lista del repositorio
+              Repositorio().eliminarPorCodigo(reserva.codigo);
+              //Mostrar aviso de eliminación
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("Reserva nº ${reserva.codigo} eliminada"))
+              );
+            },
+            child: ElementoListaReserva(
+              reserva: reserva,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PantallaDetalleReserva(reserva: reserva),
+                  ),
+                );
+              },
+            ),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color.fromARGB(255, 94, 132, 199),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PantallaFormularioReserva(),
+            ),
+          ).then((value){
+            setState(() {} );
           });
-        },),
-        floatingActionButton: FloatingActionButton(
-          onPressed:() {Navigator.push(context, MaterialPageRoute(builder: (context) =>PantallaFormularioReserva()));},
-          child: Icon(Icons.add),
-        ),
-         bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        selectedItemColor: Colors.blue,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home),label: 'Inicio'),
-          BottomNavigationBarItem(icon: Icon(Icons.list),label: 'Reservas')
-        ],
-        onTap: (indice){
-          if(indice == 0){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PantallaPrincipal()));
-          }
-          if(indice == 1){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PantallaListadoReservas()));
-          }
-        },),
+        },
+        child: const Icon(Icons.add, color: Colors.white),
+      ),
     );
   }
 }
