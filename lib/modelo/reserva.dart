@@ -109,6 +109,7 @@ class Reserva {
   set icono(IconData value) => _icono = value;
 
   IconData get icono => _icono;
+  
   //Representación de Reserva
   @override
   String toString() {

@@ -94,7 +94,7 @@ class Repositorio {
         cliente: 'Alexandro Bello',
         habitacion: 101,
         fechaInicio: DateTime(2026, 10, 10),
-        fechaFin: DateTime(2026, 10, 15),
+        fechaFin: DateTime(2026, 01, 14),
         estado: EstadoReserva.confirmada,
         importe: 350.0,
         icono: Icons.person
@@ -145,8 +145,8 @@ class Repositorio {
   }
 
   //Busca empleando un clousure y utiliza el alias definido anteriormente
-  List<Reserva> buscar(FiltroBusqueda criterio) {
-    return _reservas.where(criterio).toList();
+  List<Reserva> buscarPorCliente(String cliente) {
+    return _reservas.where((r) => r.cliente.toLowerCase().contains(cliente.toLowerCase()),).toList();
   }
 
   //Busca una reserva por código

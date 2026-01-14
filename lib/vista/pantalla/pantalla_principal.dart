@@ -14,25 +14,30 @@ class PantallaPrincipal extends StatefulWidget {
 }
 
 class _PantallaPrincipalState extends State<PantallaPrincipal> {
+  //Indice para la navegación entre pantallas
   int _indice = 0;
+
+  //Lista de pantallas para el BottonNavigationBar
   final List<Widget> _pantallas = [
-    ContenidoPrincipal(),           // Todo el contenido que tienes ahora en el body de Inicio
-    PantallaListadoReservas(), // Tu clase de listado
+    ContenidoPrincipal(),           //Contenido principal
+    PantallaListadoReservas(), //Pantalla del listado
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar( //Toma el estilo del tema
-        title: Text("Hotel Ego - Viveiro")
+        title: Text("Hotel Ego - Viveiro") //Titulo inicial
       ),
-      body: _pantallas[_indice],
-      bottomNavigationBar: BottomNavigationBar(
+      body: _pantallas[_indice], //Cambia el contenido de la pantalla principal según la selección de la barra de navegación inferior
+      bottomNavigationBar: BottomNavigationBar( //Barra de navegación inferior
         currentIndex: _indice,
-        selectedItemColor: Colors.blue,
-        items: [
+        selectedItemColor: Colors.blue, //Color para la pantalla seleccionada
+        items: [ //Iconos y texto explicativo
           BottomNavigationBarItem(icon: Icon(Icons.home),label: 'Inicio'),
           BottomNavigationBarItem(icon: Icon(Icons.list),label: 'Reservas')
         ],
+        //Funcion al presionar
         onTap: (int nuevoindice){
           setState(() {
             _indice = nuevoindice;
@@ -42,54 +47,61 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
   }
 }
 
+//Contenido de la pantalla principal
 class ContenidoPrincipal extends StatelessWidget {
   const ContenidoPrincipal({super.key});
 
   @override
   Widget build(BuildContext context) {
-    //final repositorio = Repositorio();
-    return SingleChildScrollView(
-        padding: EdgeInsets.all(15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 20,),
-            TextField(
-              decoration: InputDecoration(
-                hintText: "Buscar reserva por cliente...",
-                hintStyle: TextStyle(color: Colors.grey.shade400),
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: BorderSide.none),
-                filled: true,
-                fillColor: Colors.white
+    return Stack( //Permite apilar widgets
+      children: [
+        Container( //Contenedor para el fondo de pantalla
+          width: double.infinity, //Ocupa todo el ancho del contenedor
+          height: double.infinity, //Ocupa todo el alto del contenedor
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/fondo_pantalla_principal.jpg"), //Imagen de fondo
+              fit: BoxFit.cover, //Ajusta la imagen para que ocupe todo el espacio
+              colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.8), //Capa oscura sobre la imagen
+                BlendMode.darken, //Mezcla el color con la imagen
               ),
-              onSubmitted: (value) {
-              },
             ),
-            SizedBox(height: 40,),
-            Row(
-              children: [
-                Expanded(child: TarjetaEstado(titulo: "Check-in", numero: Repositorio().contarCheckInHoy(), colorFondo: Colors.green, icono: Icons.luggage, colorIcono: Colors.white)),
-                Expanded(child: TarjetaEstado(titulo: "Check-out", numero: Repositorio().contarCheckOutHoy(), colorFondo: Colors.red, icono: Icons.door_sliding, colorIcono: Colors.white))
-              ],
-            ),
-            SizedBox(height: 50,),
-            ElevatedButton(
-              onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => PantallaFormularioReserva()),);}, 
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8),)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("Crear reserva",style: TextStyle(color: Colors.white, fontSize: 20)),
-                  SizedBox(width: 10,),
-                  Icon(Icons.arrow_forward_ios, color: Colors.white,)
-                ],
-              )
-            )
-          ],
+          ),
         ),
-      );
+        SingleChildScrollView( //Permite un contenido más largo que la pantalla
+          padding: EdgeInsets.all(15), //Espaciado interior
+          child: Column( //Ordena el contenido en una columna
+            crossAxisAlignment: CrossAxisAlignment.center, //Centra el contenido
+            children: [
+              SizedBox(height: 30,),
+              Row( //Fila para las etiquetas de estado
+                children: [
+                  //Etiqueta de estado de reservas con fecha de entrada del día en el que se encuentra
+                  Expanded(child: TarjetaEstado(titulo: "Check-in", numero: Repositorio().contarCheckInHoy(), colorFondo: Colors.green, icono: Icons.luggage, colorIcono: Colors.white)),
+                  //Etiqueta de estado de reservas con fecha de salida en el día en el que se encuentra
+                  Expanded(child: TarjetaEstado(titulo: "Check-out", numero: Repositorio().contarCheckOutHoy(), colorFondo: Colors.red, icono: Icons.door_sliding, colorIcono: Colors.white))
+                ],
+              ),
+              SizedBox(height: 50,),
+              ElevatedButton( //Botón para navegar a la pantalla formulario
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => PantallaFormularioReserva()),);},  //Navega a la pantalla formulario
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8),)), //Estilo del botón
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center, //Centra el texto en el centro del botón
+                  mainAxisSize: MainAxisSize.min, //Tamaño del botón según su contenido
+                  children: [
+                    Text("Crear reserva",style: TextStyle(color: Colors.white, fontSize: 20)), //Texto explicativo
+                    SizedBox(width: 10,),
+                    Icon(Icons.arrow_forward_ios, color: Colors.white,) //Icono representativo
+                  ],
+                )
+              )
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
