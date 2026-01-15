@@ -15,14 +15,14 @@ class MiAppHotel extends StatelessWidget {
       title: 'Gestión Reservas',
       theme: ThemeData(
         appBarTheme: AppBarTheme( //Tema para la appBar
-          backgroundColor: const Color.fromARGB(255, 94, 132, 199), //Color de fondo
+          backgroundColor: Color.fromARGB(255, 23, 37, 33), //Color de fondo
           centerTitle: true, //Titulo centrado
-          titleTextStyle: GoogleFonts.lora( //Fuente personalizada
-            color: Colors.white, //Color de letra
-            fontSize: 20, //Tamaño de la fuente
+          titleTextStyle: GoogleFonts.ebGaramond(
+            fontSize: 24,
+            color: Color(0xFFBDC5B7)
           ),
           iconTheme: IconThemeData(
-            color: Colors.white,
+            color: Color(0xFFBDC5B7),
           ),
         ),
         scaffoldBackgroundColor: Color.fromARGB(255, 221, 230, 242), //Color de fondo de los Scaffold

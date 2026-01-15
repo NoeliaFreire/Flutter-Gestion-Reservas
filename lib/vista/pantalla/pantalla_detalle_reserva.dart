@@ -37,7 +37,7 @@ class _PantallaDetalleReservaState extends State<PantallaDetalleReserva> {
             ElevatedButton(
               //Estilos del botón
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
+                backgroundColor: Color.fromARGB(255, 120, 139, 105),
                 minimumSize: const Size(double.infinity, 60), // Tamaño mínimo del botón
                 shape: RoundedRectangleBorder( // Forma rectangular ancha
                   borderRadius: BorderRadius.circular(10),

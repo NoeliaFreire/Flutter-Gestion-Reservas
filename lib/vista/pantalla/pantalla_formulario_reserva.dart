@@ -92,7 +92,7 @@ class _PantallaFormularioReservaState extends State<PantallaFormularioReserva> {
                   }, 
                   icon: Icon(_iconosDisponibles[indice], //Muestra en cada cuadricula el icono según inidice
                   size: 35, //Tamaño icono
-                  color: Colors.green, //Color icono
+                  color: Color.fromARGB(255, 120, 139, 105), //Color icono
                   )
                 );
               },
@@ -179,7 +179,7 @@ class _PantallaFormularioReservaState extends State<PantallaFormularioReserva> {
                     child: CircleAvatar( //Da formato circular para el icono
                       radius: 50,
                       backgroundColor: Colors.white, 
-                      child: Icon(_icono, size: 50, color: Colors.green,), //Icono de tamaño grande
+                      child: Icon(_icono, size: 50, color: Color.fromARGB(255, 120, 139, 105),), //Icono de tamaño grande
                     ),
                   ),
                   SizedBox(height: 8,)
@@ -255,9 +255,9 @@ class _PantallaFormularioReservaState extends State<PantallaFormularioReserva> {
                 alignment: Alignment.center, //Centrado en la pantalla
                 decoration: BoxDecoration(
                   //El color cambia de gris a verde 
-                  color: _esValido ? Colors.green : const Color.fromARGB(255, 108, 108, 108), //Si el formulario es válido pasa a verde, si no se mantiene gris
+                  color: _esValido ? Color.fromARGB(255, 120, 139, 105) : const Color.fromARGB(255, 108, 108, 108), //Si el formulario es válido pasa a verde, si no se mantiene gris
                   borderRadius: BorderRadius.circular(10), //Forma redondeada
-                  boxShadow: _esValido ? [BoxShadow(color: Colors.green.withOpacity(0.4), blurRadius: 10)] : [], //Si el formulario es válido el contendor tendrá sombreado
+                  boxShadow: _esValido ? [BoxShadow(color: Color.fromARGB(255, 120, 139, 105).withOpacity(0.4), blurRadius: 10)] : [], //Si el formulario es válido el contendor tendrá sombreado
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center, //Hijo centrado en el contenedor

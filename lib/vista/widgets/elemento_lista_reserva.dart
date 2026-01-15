@@ -33,7 +33,7 @@ class ElementoListaReserva extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle //Forma cirular para el icono
               ),
-              child: Icon(reserva.icono, color: Colors.green,), //Icono de la reserva de color verde
+              child: Icon(reserva.icono, color: Color.fromARGB(255, 120, 139, 105),), //Icono de la reserva de color verde
             ),
             SizedBox(height: 15,), //Espacio horizontal
             Expanded( //Ocupa todo el espacio disponible del contenedor

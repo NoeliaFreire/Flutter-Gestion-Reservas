@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:xestion_reservas_hotel/vista/pantalla/pantalla_detalle_reserva.dart';
 import 'package:xestion_reservas_hotel/vista/pantalla/pantalla_formulario_reserva.dart';
 import 'package:xestion_reservas_hotel/vista/widgets/tarjeta_estado.dart';
@@ -27,7 +28,22 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar( //Toma el estilo del tema
-        title: Text("Hotel Ego - Viveiro") //Titulo inicial
+        title: Text('EGO HOTEL',),
+        leadingWidth: 130,
+        leading: Padding(
+          padding: EdgeInsets.only(left: 60),
+          child: Image.asset('assets/logoHotel.png',fit: BoxFit.contain),),
+          actions: [
+            IconButton(
+              onPressed: (){
+                return showAboutDialog(
+                  context: context,
+                  applicationName: 'Gestor Reservas Hotel Ego',
+                  applicationIcon: Icon(Icons.info),
+                  applicationVersion: '1.0.0'
+                );}, 
+              icon: Icon(Icons.info_outline))
+          ], //Logo de la empresa
       ),
       body: _pantallas[_indice], //Cambia el contenido de la pantalla principal según la selección de la barra de navegación inferior
       bottomNavigationBar: BottomNavigationBar( //Barra de navegación inferior
