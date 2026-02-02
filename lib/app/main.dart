@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:xestion_reservas_hotel/modelo/repositorio.dart';
 import '../vista/pantalla/pantalla_principal.dart';
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Repositorio().conDatosLocal();
   runApp(const MiAppHotel());
 }
 

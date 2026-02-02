@@ -1,0 +1,52 @@
+[
+  {
+    "codigo": "GEN001",
+    "cliente": "Alexandro Bello",
+    "habitacion": 101,
+    "fechaInicio": "2026-10-10",
+    "fechaFin": "2026-01-22",
+    "estado": "confirmada",
+    "importe": 350.0,
+    "icono": "person"
+  },
+  {
+    "codigo": "GEN002",
+    "cliente": "Gillermo Díaz",
+    "habitacion": 102,
+    "fechaInicio": "2025-11-01",
+    "fechaFin": "2025-11-03",
+    "estado": "pendiente",
+    "importe": 200.0,
+    "icono": "star"
+  },
+  {
+    "codigo": "GEN003",
+    "cliente": "Noelia Freire",
+    "habitacion": 103,
+    "fechaInicio": "2026-01-22",
+    "fechaFin": "2026-02-18",
+    "estado": "pendiente",
+    "importe": 1560.9,
+    "icono": "bed"
+  },
+  {
+    "codigo": "GEN004",
+    "cliente": "Álvaro Ruíz",
+    "habitacion": 101,
+    "fechaInicio": "2026-04-03",
+    "fechaFin": "2025-04-21",
+    "estado": "cancelada",
+    "importe": 2500.0,
+    "icono": "person"
+  },
+  {
+    "codigo": "GEN005",
+    "cliente": "Samuel de Luque",
+    "habitacion": 105,
+    "fechaInicio": "2026-01-02",
+    "fechaFin": "2026-01-19",
+    "estado": "pendiente",
+    "importe": 777.0,
+    "icono": "person"
+  }
+]

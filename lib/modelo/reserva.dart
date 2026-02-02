@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 enum EstadoReserva { pendiente, confirmada, cancelada, finalizada }
@@ -6,7 +7,7 @@ enum EstadoReserva { pendiente, confirmada, cancelada, finalizada }
 class Reserva {
   //Se establece como final para evitar modificaciones en el id de la reserva,
   // garantizando que cada reserva tenga un código único e inmutable una vez creada.
-  final int _codigo;
+  final String _codigo;
 
   //Atributos privados que encapsulan los datos de la reserva
   String _cliente;
@@ -19,15 +20,15 @@ class Reserva {
 
   //Constructor con parámetros nombrados
   Reserva({
-    required int codigo,
+    required String codigo,
     required String? cliente,
     required int habitacion,
     required DateTime? fechaInicio,
     required DateTime? fechaFin,
     required EstadoReserva? estado,
     required double? importe,
-    required IconData? icono,
-  }) : _codigo = codigo,
+    required IconData? icono,}
+  ) : _codigo = codigo,
        _cliente = cliente ?? 'Desconocido',
        _habitacion = habitacion,
        _fechaInicio = fechaInicio ?? DateTime.now(),
@@ -36,7 +37,35 @@ class Reserva {
        _importe = importe ?? 0.0,
        _icono = icono ?? Icons.person;
 
-  int get codigo => _codigo;
+  factory Reserva.fromJson(Map<String, dynamic> json){
+    return Reserva(
+      codigo: json['codigo'], 
+      cliente: json['cliente'], 
+      habitacion: json['habitacion'], 
+      fechaInicio: DateTime.parse(json['fechaInicio']) , 
+      fechaFin: DateTime.parse(json['fechaFin']), 
+      estado: EstadoReserva.values.firstWhere(
+        (e) => e.name == json['estado']
+      ), 
+      importe: json['importe'].toDouble(), 
+      icono: _mapIcon(json['icono']),);
+  }
+
+  static IconData _mapIcon(String iconName) {
+    switch (iconName) {
+      case 'star': return Icons.star;
+      case 'bed': return Icons.bed;
+      case 'hotel': return Icons.hotel;
+      case 'beach_access': return Icons.beach_access;
+      case 'family_restroom': return Icons.family_restroom;
+      case 'business_center': return Icons.business_center;
+      default: return Icons.person;
+    }
+  }
+  
+  //===GETTERS Y SETTERS===
+
+  String get codigo => _codigo;
 
   String get cliente => _cliente;
 
